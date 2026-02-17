@@ -1,5 +1,6 @@
 package example.features.java8;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -91,6 +92,7 @@ public class Java8_Features implements SampleInterface {
 		Optional<String> optVariable= Optional.of("Hello there!!!"); // Use only when you are 100% sure it’s non-null
 		System.out.println("Optional.of  In Java 8 "+optVariable);
 		
+		
 		Optional<String> optVariable1= Optional.ofNullable("HHEYEUEIEO"); // Used when the value might be null. Returns the value if not null, returns "Optional.Empty" if null 
 		System.out.println("Optional.ofNullable  In Java 8 "+optVariable1);
 		
@@ -147,7 +149,8 @@ public class Java8_Features implements SampleInterface {
 				optVariable1.filter(x->x.length()>2));
 		
 
-		
+		Optional<List<String>> optVariableList= Optional.of(List.of("1","2","3")); // Use only when you are 100% sure it’s non-null
+
 	}
 
 	//Own Implementation for SampleInterface
