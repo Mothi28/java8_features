@@ -46,7 +46,7 @@ public class StreamFeature {
 		}).limit(10);
 		g1.forEach(System.out::println);
 
-		// Creating streams using Stream.generate().
+		// Creating streams using Stream.iterate().
 		/*
 		 * This Stream.iterate() needs seed value and operator. This generate gives
 		 * infinite value so, the condition is stopped by given "limit"
@@ -126,6 +126,34 @@ public class StreamFeature {
 		
 		System.out.println(h1);
 		
+		Map<String, List<String>> j1=employees.stream()
+				.collect(Collectors.groupingBy(Employee::getDepartment,Collectors.mapping(Employee::getName, Collectors.toList())));  //this gives the depart and name of the employee alone.
+		
+		//employees.stream().collect(Collectors.groupingBy(Employee::getDepartment)); till this the grouping is done but the List<Employee> is returned.
+	
+		System.out.println("Grouping by Depart "+j1);
+						
+		Map<String, Long> j2=employees.stream()
+				.collect(Collectors.groupingBy(Employee::getDepartment,Collectors.counting()));
+		
+		System.out.println("Grouping by Depart and count "+j2); //this gives the grouping by department and the counting
+		
+		Map<String, Double> j3=employees.stream()
+				.collect(Collectors.groupingBy(Employee::getDepartment,Collectors.averagingDouble(Employee::getSalary)));
+		
+		System.out.println("Grouping by Depart and average of salary in DOuble "+j3); //this gives the grouping by department and the average in double.
+		
+		Map<String, Optional<Employee>> j4=employees.stream()
+				//comparingDouble(Employee::getSalary)); //this gives the max salary in the Employee alone.
+				.collect(Collectors.groupingBy(Employee::getDepartment,Collectors.maxBy(Comparator.comparingDouble(Employee::getSalary))));
+		
+		System.out.println("Grouping by Depart and Maximum salary in DOuble "+j4.toString()); //this gives the grouping by department and the maximum salary in double.
+	
+		Stream<Integer> j5 = Stream.of(45,2);
+		System.out.println("Reduce operation without identity "+j5.reduce((a, b) -> a * b)); // as values are present in the stream, the result will be multiplication.
+		
+		Stream<Integer> j6 = Stream.empty();
+		System.out.println("Reduce operation with identity value "+j6.reduce(56,(a, b) -> a * b)); // as Stream is empty, the result will be 56 the identity value. 
 		
 	}
 
